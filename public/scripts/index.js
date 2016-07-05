@@ -157,10 +157,8 @@ function setRowContent(item, row)
 function addItem(item, isNew){
 	
 	var row = document.createElement('tr');
-    console.log("Mahesh - addItem() ..row = " + row);
 	row.className = "tableRows";
 	var id = item && item.id;
-    console.log("Mahesh - addItem() ..id = " + id);
 	if(id){
 		row.setAttribute('data-id', id);
 	}
@@ -178,34 +176,28 @@ function addItem(item, isNew){
  	}
 
 	var table = document.getElementById('notes');
-    console.log("Mahesh - addItem() ..table = " + table);
 	table.lastChild.appendChild(row);
 	row.isNew = !item || isNew;
 	
 	if(row.isNew)
 	{
 		var textarea = row.firstChild.firstChild;
-        console.log("Mahesh - addItem() ..textarea = " + textarea);
-		textarea.focus();
+        textarea.focus();
 	}
 	
 }
 
 function deleteItem(deleteBtnNode){
 	var row = deleteBtnNode.parentNode.parentNode;
-    console.log("Mahesh - deleteItem() ..row = " + row);
-	if(row.getAttribute('data-id'))
+    if(row.getAttribute('data-id'))
 	{
-		console.log("Mahesh - deleteItem() ..if(row.getAttribute('data-id'))");
 		xhrDelete(REST_DATA + '?id=' + row.getAttribute('data-id'), function(){
-			console.log("Mahesh - deleteItem() ..row.remove()");
 			row.remove();
 		}, function(err){
 			console.error(err);
 		});
 	}
 	else {
-		console.log("Mahesh - deleteItem() ..else{}");
 		window.location.reload(true);
 	}
 }
